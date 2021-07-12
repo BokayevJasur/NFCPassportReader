@@ -15,7 +15,7 @@ import CoreNFC
 @available(iOS 13, *)
 public class PassportReader : NSObject {
     private var passport : NFCPassportModel = NFCPassportModel()
-    private var readerSession: NFCTagReaderSession?
+    public var readerSession: NFCTagReaderSession?
     private var elementReadAttempts = 0
     private var currentlyReadingDataGroup : DataGroupId?
     
@@ -312,7 +312,7 @@ extension PassportReader {
         // Mark the next 'invalid session' error as not reportable (we're about to cause it by invalidating the
         // session). The real error is reported back with the call to the completed handler
         self.shouldNotReportNextReaderSessionInvalidationErrorUserCanceled = true
-        self.readerSession?.invalidate(errorMessage: self.nfcViewDisplayMessageHandler?(errorMessage) ?? errorMessage.description)
+//        self.readerSession?.invalidate(errorMessage: self.nfcViewDisplayMessageHandler?(errorMessage) ?? errorMessage.description)
         self.scanCompletedHandler(nil, error)
     }
 
