@@ -296,7 +296,7 @@ extension PassportReader {
                         // doing so, we want to be sure that the 'user cancelled' error that we're causing by
                         // calling 'invalidate' will not be reported back to the user
                         self?.shouldNotReportNextReaderSessionInvalidationErrorUserCanceled = true
-                        self?.readerSession?.invalidate()
+//                        self?.readerSession?.invalidate()
                         
                         // If we have a masterlist url set then use that and verify the passport now
                         self?.passport.verifyPassport(masterListURL: self?.masterListURL, useCMSVerification: self?.passiveAuthenticationUsesOpenSSL ?? false)
