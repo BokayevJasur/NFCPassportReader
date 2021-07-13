@@ -25,9 +25,9 @@ extension NFCViewDisplayMessage {
             case .authenticatingWithPassport(let progress):
                 let progressString = handleProgress(percentualProgress: progress)
                 return "\(progressString)"
-            case .readingDataGroupProgress(let dataGroup, let progress):
+            case .readingDataGroupProgress(  _, let progress):
                 let progressString = handleProgress(percentualProgress: progress)
-                return "Reading \(dataGroup).....\n\n\(progressString)"
+                return "\(progressString)"
             case .error(let tagError):
                 switch tagError {
                     case NFCPassportReaderError.TagNotValid:
