@@ -288,7 +288,7 @@ extension PassportReader {
                 if let error = error {
                     self?.invalidateSession(errorMessage:NFCViewDisplayMessage.error(error), error: error)
                 } else {
-                    self?.updateReaderSessionMessage(alertMessage: NFCViewDisplayMessage.successfulRead)
+//                    self?.updateReaderSessionMessage(alertMessage: NFCViewDisplayMessage.successfulRead)
                     
                     // Before we finish, check if we should do active authentication
                     self?.doActiveAuthenticationIfNeccessary() { [weak self] in
