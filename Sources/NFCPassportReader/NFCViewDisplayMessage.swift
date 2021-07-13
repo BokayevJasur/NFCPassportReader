@@ -49,9 +49,9 @@ extension NFCViewDisplayMessage {
     }
     
     func handleProgress(percentualProgress: Int) -> String {
-        let p = (percentualProgress/20)
-        let full = String(repeating: "🟢 ", count: p)
-        let empty = String(repeating: "⚪️ ", count: 5-p)
+        let p = (percentualProgress/10)
+        let full = String(repeating: "🔵 ", count: p)
+        let empty = String(repeating: "⚪️ ", count: 10-p)
         return "\(full)\(empty)"
     }
 }
