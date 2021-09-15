@@ -35,6 +35,8 @@ public class PassportReader : NSObject {
     private var masterListURL : URL?
     private var shouldNotReportNextReaderSessionInvalidationErrorUserCanceled : Bool = false
 
+    var isConnect = false
+    
     // By default, Passive Authentication uses the new RFS5652 method to verify the SOD, but can be switched to use
     // the previous OpenSSL CMS verification if necessary
     public var passiveAuthenticationUsesOpenSSL : Bool = false
@@ -62,6 +64,7 @@ public class PassportReader : NSObject {
         self.passport = NFCPassportModel()
         self.mrzKey = mrzKey
         
+        self.isConnect = false
         self.dataGroupsToRead.removeAll()
         self.dataGroupsToRead.append( contentsOf:tags)
         self.scanCompletedHandler = completed
@@ -93,6 +96,12 @@ public class PassportReader : NSObject {
 
             self.updateReaderSessionMessage( alertMessage: NFCViewDisplayMessage.requestPresentPassport )
             readerSession?.begin()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
+                if !self.isConnect {
+                    self.scanCompletedHandler(nil, NFCPassportReaderError.ConnectionError)
+                }
+            })
         }
     }
 }
@@ -187,6 +196,7 @@ extension PassportReader : NFCTagReaderSessionDelegate {
             }
 
             DispatchQueue.global().async {
+                self.isConnect = true
                 self.startReading( )
             }
         }
